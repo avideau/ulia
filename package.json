@@ -2,15 +2,17 @@
   "name": "test-ulia",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "http": "^0.0.1-security",
-    "http-proxy": "^1.18.1",
-    "https": "^1.0.0"
+    "http-proxy": "^1.18.1"
+  },
+  "devDependencies": {
+    "electron": "^28.2.1"
   }
 }
