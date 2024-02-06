@@ -1,7 +1,6 @@
 const { app, BrowserWindow } = require('electron')
 const httpProxy = require('http-proxy')
-const fs = require('fs')
-const path = require('path')
+const axios = require('axios')
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -12,15 +11,20 @@ const createWindow = () => {
   win.loadFile('index.html')
 }
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
   createWindow()
+
+  let key = '';
+  let cert = '';
+  await axios.get('https://static.ulia.stream/obs-tls/cert.pem').then(response => cert = response.data)
+  await axios.get('https://static.ulia.stream/obs-tls/key.pem').then(response => key = response.data)
 
   httpProxy.createProxyServer({
     target: 'http://127.0.0.1:4455',
     ws: true,
     ssl: {
-      key: fs.readFileSync(path.resolve(__dirname, './certs/obs.ulia.stream.key'), 'utf8'),
-      cert: fs.readFileSync(path.resolve(__dirname, './certs/obs.ulia.stream.crt'), 'utf8')
+      key: key,
+      cert: cert
     }
   }).listen(4458)
 })

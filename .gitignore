@@ -1,7 +1,1 @@
 node_modules/
-certs/*.crt
-certs/*.key
-certs/*.csr
-certs/*.srl
-!certs/obs.ulia.stream.key
-!certs/obs.ulia.stream.crt
